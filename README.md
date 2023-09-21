@@ -1,27 +1,26 @@
 # Daten-Import-in-Ocis
 
-OCIS Storage Management Tool
-
 This tool provides functionality to manage OCIS storage, allowing for the creation of files and directories, and the retrieval of space information.
 
-Features:
+## Features:
 
 Upload files or directories to OCIS storage.
 Create directories recursively.
 View available spaces.
 Compute checksums (SHA1, MD5, Adler32) for files.
 Symlink files and directories in OCIS storage.
-Requirements:
+
+## Requirements:
 
 Python 3.x
 msgpack library (you can install it using pip: pip install msgpack)
 
-Usage:
+## Usage:
 
-bash
-Copy code
-python script_name.py [OPTIONS] [ITEMS]
-Options:
+```bash
+python ocis-import.py [OPTIONS] [ITEMS]
+```
+## Options:
 
 items: Paths of the files or directories to be uploaded. Use -s arg format to specify directory name.
 -l / --list: List all available spaces.
@@ -30,17 +29,18 @@ items: Paths of the files or directories to be uploaded. Use -s arg format to sp
 Examples:
 
 List all available spaces:
-bash
-Copy code
+```bash
 python3 ocis-import.py -l
+```
 Upload a file to a space:
-bash
-Copy code
+```bash
 python3 ocis-import.py -s personal/test myfile.txt
+```
 Create a directory in a space:
-bash
-Copy code
+```bash
 python3 ocis-import.py -s personal/test:myfolder
+```
+
 Contribute:
 
 Feedback, bug reports, and pull requests are welcome.
