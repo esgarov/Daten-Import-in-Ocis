@@ -4,11 +4,13 @@ This tool provides functionality to manage OCIS storage, allowing for the creati
 
 ## Features:
 
-Upload files or directories to OCIS storage.
-Create directories recursively.
-View available spaces.
-Compute checksums (SHA1, MD5, Adler32) for files.
-Symlink files and directories in OCIS storage.
+Compute and handle various checksums like SHA1, MD5, and Adler32 for file uploads.
+Recursively create directories and upload files to the OCIS storage.
+List all available spaces within the OCIS storage.
+Handle file name conflicts by appending a counter to the new file's name.
+Update the tree size of parent directories after a file upload.
+Allows specification of a space and directory within that space for file or directory creation.
+Symlink creation for easy access and management.
 
 ## Requirements:
 
@@ -34,7 +36,11 @@ python3 ocis-import.py -l
 ```
 Upload a file to a space:
 ```bash
-python3 ocis-import.py -s personal/test myfile.txt
+python3 ocis-import.py myfile.txt -s personal/test
+```
+Upload a file to the folder in space:
+```bash
+python3 ocis-import.py myfile.txt -s personal/test:folder
 ```
 Create a directory in a space:
 ```bash
