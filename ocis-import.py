@@ -46,6 +46,10 @@ def compute_adler32(file_path):
     return struct.pack('!I', adler32_value)
 
 def create_recursive_owncloud_entity(top_dir, space_path, entity_path, parent_uuid=None):
+    if not os.access(entity_path):
+        print(f"ERROR: cannot read {entity_path}, aborting...", file=sys.stderr)
+        sys.exit(1)
+
     # Check if the current path is a directory or file
     is_file = os.path.isfile(entity_path)
     
