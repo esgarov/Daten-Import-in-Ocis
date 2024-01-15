@@ -46,11 +46,6 @@ def compute_adler32(file_path):
     return struct.pack('!I', adler32_value)
 
 def create_recursive_owncloud_entity(top_dir, space_path, entity_path, parent_uuid=None):
-    if not os.access(entity_path, os.R_OK):
-        print(f"ERROR: cannot read {entity_path}, aborting...", file=sys.stderr)
-        sys.exit(1)
-
-
     # Check if the current path is a directory or file
     is_file = os.path.isfile(entity_path)
     
@@ -266,10 +261,20 @@ def get_available_spaces(top):
     return spaces
 
 if __name__ == '__main__':
-    default_topdir=os.getenv('OCIS_TOPDIR', os.getenv('HOME') + "/.ocis")
+    default_topdir = os.getenv('OCIS_TOPDIR', os.getenv('HOME') + "/.ocis")
 
-    parser = argparse.ArgumentParser(description='Upload files or create directories in the OCIS storage.')
-
+    parser = argparse.ArgumentParser(description='Upload files or create directories in the OCIS storage.', 
+                                     epilog="""\
+Usage Examples:
+  1. Creating a Subdirectory in a Space:
+     python script.py -s 'type/name:subdir' 
+     This creates a subdirectory 'subdir' inside the space 'type/name'.
+     
+  2. Uploading Items into a Subdirectory of a Space:
+     python script.py item1 item2 -s 'type/name:subdir'
+     This uploads 'item1' and 'item2' into 'subdir' inside the space 'type/name'.
+     Note: 'subdir' should already exist, or it will be created.
+                                     """)
     parser.add_argument('items', nargs='*', help='Paths of the files or directories to be uploaded. Use -s arg format to specify directory name.')
     parser.add_argument('-l', '--list', action='store_true', help='List all available spaces')
     parser.add_argument('-s', '--space', help='The name of the space where the files will be uploaded, followed by a colon and the directory name if creating a directory (e.g., personal/test:foldername)')
@@ -326,4 +331,3 @@ if __name__ == '__main__':
     # Finally, create the main directories/files
     for item in args.items:
         create_recursive_owncloud_entity(args.topdir, chosen_space_path, item, last_parent_uuid)
-
