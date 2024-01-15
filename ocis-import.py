@@ -10,6 +10,8 @@ import msgpack
 import zlib
 import sys
 import struct
+import datetime
+from datetime import timezone
 
 def fourslashes(s):
     if s is None:
@@ -176,7 +178,7 @@ def create_owncloud_entity(top_dir, space_path, entity_path, parent_uuid=None, i
         }
     # If the current directory is the root directory (no parent_uuid)
     if not parent_uuid:
-        current_time = datetime.datetime.utcnow().isoformat() + "Z"
+        current_time = datetime.datetime.now(timezone.utc).isoformat()
         metadata['user.ocis.tmp.etag'] = b''  # Empty value for tmp.etag
         metadata['user.ocis.tmtime'] = current_time.encode('utf-8')
 
