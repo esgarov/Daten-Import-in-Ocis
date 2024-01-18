@@ -36,11 +36,11 @@ python3 ocis-import.py -l
 ```
 Upload a file to a space:
 ```bash
-python3 ocis-import.py myfile.txt -s personal/test
+python3 ocis-import.py -s personal/test myfile.txt
 ```
 Upload a file to the folder in space:
 ```bash
-python3 ocis-import.py myfile.txt -s personal/test:folder
+python3 ocis-import.py -s personal/test:folder myfile.txt
 ```
 Create a directory in a space:
 ```bash
